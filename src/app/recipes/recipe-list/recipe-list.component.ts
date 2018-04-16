@@ -8,6 +8,7 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [
+    new Recipe('Pan Cake','delicious round baked bread','https://assets.marthastewart.com/styles/video-preview-1280x720-highdpi/d31/easy_mothers_day_pancake_recipe/easy_mothers_day_pancake_recipe_horiz.jpg?itok=90ij5KGf'),
     new Recipe('Pan Cake','delicious round baked bread','https://assets.marthastewart.com/styles/video-preview-1280x720-highdpi/d31/easy_mothers_day_pancake_recipe/easy_mothers_day_pancake_recipe_horiz.jpg?itok=90ij5KGf')
   ];
 
