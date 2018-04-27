@@ -5,8 +5,8 @@ import { Component, EventEmitter, Output } from "@angular/core";
     templateUrl: './header.component.html'
 })
 export class HeaderComponent{
-    @Output() selectedDropDown = new EventEmitter<string>();
-    onClick(selected: string){
-        this.selectedDropDown.emit(selected);
-    }
+    // @Output() selectedDropDown = new EventEmitter<string>();
+    // onClick(selected: string){
+    //     this.selectedDropDown.emit(selected);
+    // }
 }
