@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,16 +8,18 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe('Pan Cake','delicious round baked bread','https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-videoSixteenByNineJumbo1600.jpg'),
-    new Recipe('Bake Cake','Sweet round baked bread','https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-videoSixteenByNineJumbo1600.jpg'),
-  ];
-  @Output() selectedRecipe4Detail = new EventEmitter<Recipe>();
-  constructor() { }
+  recipes: Recipe[];
+  //  = [
+  //   new Recipe('Pan Cake','delicious round baked bread','https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-videoSixteenByNineJumbo1600.jpg'),
+  //   new Recipe('Bake Cake','Sweet round baked bread','https://static01.nyt.com/images/2017/03/24/dining/24COOKING-CLASSICPANCAKES/24COOKING-CLASSICPANCAKES-videoSixteenByNineJumbo1600.jpg'),
+  // ];
+  // @Output() selectedRecipe4Detail = new EventEmitter<Recipe>();
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
+    this.recipes = this.recipeService.getRecipes();
   }
-  onSelectedRecipe(recipesel :Recipe){
-    this.selectedRecipe4Detail.emit(recipesel);
-  }
+  // onSelectedRecipe(recipesel :Recipe){
+  //   this.selectedRecipe4Detail.emit(recipesel);
+  // }
 }
