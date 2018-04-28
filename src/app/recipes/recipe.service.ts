@@ -29,4 +29,8 @@ export class RecipeService {
     addIngredients(ingredients: Ingredient[]){
         this.shoppingListSvc.addMultipleIngredients(ingredients);
     }
+
+    getRecipeById(id:number){
+        return this.recipes[id];
+    }
 }

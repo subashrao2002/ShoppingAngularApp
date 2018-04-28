@@ -1,4 +1,7 @@
-<a style="cursor: pointer;" class="list-group-item clearfix" (click)="onSelectedRecipe()" #localX>
+<a  style="cursor: pointer;" 
+    class="list-group-item clearfix" 
+    [routerLink] = "[recipe_index]"
+    routerLinkActive="active" >
   <div class="pull-left">
       <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
       <p class="list-group-item-text">{{ recipe.description }}</p>
