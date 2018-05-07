@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit,OnDestroy {
-  ingredients: Ingredient[] 
+export class ShoppingListComponent implements OnInit, OnDestroy {
+  ingredients: Ingredient[]
   private subscription: Subscription;
   // =[
   //   new Ingredient('Apples',5),
@@ -21,15 +21,18 @@ export class ShoppingListComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.ingredients = this.shoppingListsvc.getIngredients();
     this.subscription = this.shoppingListsvc.ingredientsChanged.subscribe(
-      (ingredientsArray :Ingredient[]) => {
+      (ingredientsArray: Ingredient[]) => {
         this.ingredients = ingredientsArray;
       }
     )
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  onIngredientAdded(ingredient: Ingredient ){
+  onIngredientAdded(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
+  }
+  onEditItem(index: number) {
+    this.shoppingListsvc.editedIngredient.next(index);
   }
 }
