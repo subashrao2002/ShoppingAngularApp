@@ -22,9 +22,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   constructor(private shoppinglistSvc: ShoppingListService) { }
 
   ngOnInit() {
-    this.subscription =  this.shoppinglistSvc.editedIngredient.subscribe(
-      (index:number) => {
-        this.editMode=true;
+    this.subscription = this.shoppinglistSvc.editedIngredient.subscribe(
+      (index: number) => {
+        this.editMode = true;
         this.editedIngredientIndex = index;
         //get ingredient from svc 
         this.editedIngredient = this.shoppinglistSvc.getIngredientbyId(index);
@@ -35,7 +35,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       }
     );
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
   // oningredientAdd(){
@@ -45,7 +45,24 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   //   this.shoppinglistSvc.addIngredient(new Ingredient(name,amount));
   // }
 
-  onAddItems(form: NgForm){
-    this.shoppinglistSvc.addIngredient(new Ingredient( form.value.name ,form.value.amount ));
+  onSubmit(form: NgForm) {
+    const updatedIngredient: Ingredient = new Ingredient(form.value.name, form.value.amount);
+    if (this.editMode) {
+      this.shoppinglistSvc.updateIngredient(this.editedIngredientIndex, updatedIngredient);
+    } else {
+      this.shoppinglistSvc.addIngredient(updatedIngredient);
+    }
+    this.editMode = false;
+    this.slform.reset();
+  }
+  onClear(){
+    this.editMode = false;
+    this.slform.reset();
+  }
+
+  onDelete(){
+    this.shoppinglistSvc.deleteIngredient(this.editedIngredientIndex);
+    this.editMode = false;
+    this.slform.reset();
   }
 }
