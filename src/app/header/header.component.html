@@ -7,15 +7,34 @@
             <ul class="nav navbar-nav">
                 <!-- <li><a href="#" (click)="onClick('Recipe')" >Recipes</a></li>
                 <li><a href="#" (click)="onClick('Shopping')">Shopping List</a></li> -->
-                <li routerLinkActive="active" ><a routerLink="/recipes">Recipes</a></li>
-                <li routerLinkActive="active"><a routerLink="/shopping-list" >Shopping List</a></li>
+                <li routerLinkActive="active">
+                    <a routerLink="/recipes">Recipes</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/shopping-list">Shopping List</a>
+                </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" >
-                <li class="dropdown" appDropdown >
-                    <a class="dropdown-toggle" role="button" >Manage<span class="caret"></span></a>
+            <ul class="nav navbar-nav navbar-right">
+                <ng-template [ngIf]="!authSvc.isAuthenticated()" >
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/signup']">Sign Up</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/signin']">Login</a>
+                    </li>
+                </ng-template>
+                <li><a style="cursor: pointer;" (click)="onLogOut()" *ngIf="authSvc.isAuthenticated()" >Logout</a></li>
+                <li class="dropdown" appDropdown *ngIf="authSvc.isAuthenticated()">
+                    <a class="dropdown-toggle" role="button">Manage
+                        <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a style="cursor: pointer;">Save Data</a></li>
-                        <li><a style="cursor: pointer;">Fetch Data</a></li>
+                        <li>
+                            <a style="cursor: pointer;" (click)="onSave()">Save Data</a>
+                        </li>
+                        <li>
+                            <a style="cursor: pointer;" (click)="onFetch()">Fetch Data</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
